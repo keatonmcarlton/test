@@ -1,16 +1,11 @@
-def decoding():
-    guy3 = input("Please enter your password to decode: ")
-    print()
-    newguy2 = []
-    guystring = ''
-    guy3.split()
-    for i in range(0, len(guy3)):
-        newguy2.append((int(guy3[i]) + 7) % 10)
-        guystring += str(newguy2[i])
-    print('Your password has been decoded and stored!\n')
-    return guystring
-
-
+def decode(encoded):
+    decoded = ''
+    for char in encoded:
+        if int(char) - 3 >= 0:
+            decoded += str(int(char) - 3)
+        else: #needs to loop back to the top of 0-9 order if it cant be subtracted
+            decoded += str(int(char) + 7)
+    print(f'The encoded password is {encoded}, and the original password is {decoded}.')
 def encoding():
     guy = input("Please enter your password to encode: ")
     print()
@@ -26,9 +21,9 @@ def encoding():
 
 def main():
     keepgoing = True
+    encoded_password = '' #these need to be here or they will be reset every time
+    decoded_password = '' #these need to be here or they will be reset every time
     while keepgoing:
-        encoded_password = ''
-        decoded_password = ''
         print('Menu')
         print('-------------')
         print('1. Encode')
@@ -41,7 +36,7 @@ def main():
             encoded_password = encoding()
         elif userinput == 2:
             print()
-            decoded_password = decoding()
+            decode(encoded_password)
         elif userinput == 3:
             keepgoing = False
         else:
